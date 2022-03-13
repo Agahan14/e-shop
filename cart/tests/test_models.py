@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..models import Cart, Order, CartItem
+from ..models import Cart, Order
 from users.models import User
 
 
