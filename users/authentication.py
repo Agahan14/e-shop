@@ -1,12 +1,14 @@
 import jwt, datetime
 from rest_framework import exceptions
 
+
 def create_access_token(id):
     return jwt.encode({
         'user_id': id,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=5),
         'iat': datetime.datetime.utcnow()
     }, 'access_secret', algorithm='HS256')
+
 
 def decode_access_token(token):
     try:
@@ -16,12 +18,14 @@ def decode_access_token(token):
     except:
         raise exceptions.AuthenticationFailed('unauthenticated')
 
+
 def create_refresh_token(id):
     return jwt.encode({
         'user_id': id,
         'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
         'iat': datetime.datetime.utcnow()
     }, 'refresh_secret', algorithm='HS256')
+
 
 def decode_refresh_token(token):
     try:

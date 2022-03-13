@@ -34,7 +34,6 @@ class OrderView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
 
 
-
 class OrderDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = OrderSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)

@@ -5,7 +5,12 @@ from rest_framework.exceptions import APIException, AuthenticationFailed
 
 from .serializers import UserSerializer
 from .models import User
-from .authentication import create_access_token, create_refresh_token,decode_access_token,decode_refresh_token
+from .authentication import (
+    create_access_token,
+    create_refresh_token,
+    decode_access_token,
+    decode_refresh_token
+)
 
 
 class RegisterAPIView(APIView):
@@ -33,7 +38,11 @@ class LoginAPIView(APIView):
 
         response = Response()
 
-        response.set_cookie(key='refreshToken', value= refresh_token, httponly=True)
+        response.set_cookie(
+            key='refreshToken',
+            value=refresh_token,
+            httponly=True
+        )
         response.data = {
             'token': access_token
         }

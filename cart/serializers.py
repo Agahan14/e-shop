@@ -17,7 +17,14 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'total_price', 'created_date', 'is_order', 'products']
+        fields = [
+            'id',
+            'user',
+            'total_price',
+            'created_date',
+            'is_order',
+            'products'
+        ]
 
     def get_total_price(self, obj):
         total_price = 0
@@ -34,13 +41,21 @@ class OrderSerializer(serializers.Serializer):
 
     class Meta:
         model = Order
-        fields = ['id','user', 'cart', 'order_date', 'total_price', 'products']
+        fields = [
+            'id',
+            'user',
+            'cart',
+            'order_date',
+            'total_price',
+            'products']
 
     def get_total_price(self, obj):
         total_price = 0
         for product in obj.products.all():
             if product.discount > 0:
-                total_price += (product.price - (product.price*(product.discount/100))) * product.quantity
+                total_price += (product.price - (product.price
+                                                 * (product.discount/100))) * product.quantity
             else:
                 total_price += product.price * product.quantity
+
         return total_price

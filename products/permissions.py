@@ -8,6 +8,7 @@ class OwnerPermission(BasePermission):
             return True
         return obj.user == request.user
 
+
 class IsSupplierPermission(BasePermission):
 
     def has_permission(self, request, view):

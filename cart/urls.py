@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import *
+from .views import CartView, CartDetailView, CartItemView, CartItemDetailView, OrderView, OrderDetailView
 
 
 urlpatterns = [
