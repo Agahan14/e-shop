@@ -10,12 +10,6 @@ This project was designed for online shopping.
 
 To create this project I used Python, Django, DRF, PostgresSQL
 
-```
-pip install django
-pip install djangorestframework
-```
-And postgresSQL you need to install in browser
-
 ### Installing
 
 Well, at the beginning you need to clone your my repositories and insert it in version controle in Pycharm, then you need to create venv "python -m venv venv", then install all requirements "pip install -r requirements.txt", then you need to make migrations
