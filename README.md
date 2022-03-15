@@ -12,7 +12,7 @@ To create this project I used Python, Django, DRF, PostgresSQL
 
 ### Installing
 
-Well, at the beginning you need to clone your my repositories and insert it in version controle in Pycharm, then you need to create venv "python -m venv venv", then install all requirements "pip install -r requirements.txt", then you need to make migrations
+Well, at the beginning you need to clone my repositories and insert it in version controle in Pycharm, then you need to create venv "python -m venv venv", then install all requirements "pip install -r requirements.txt", then you need to make migrations
 ```
 python manage.py makemigrations
 python manage.py migrate
