@@ -1,9 +1,14 @@
 from rest_framework import serializers
 
-from .models import Product, Comment, ProductCategory
+from .models import (
+    Product,
+    Comment,
+    ProductCategory,
+)
 
 
 class CommentSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Comment
         fields = [
@@ -13,19 +18,18 @@ class CommentSerializer(serializers.ModelSerializer):
             'created_date',
             'replies',
             'user',
-            'products'
+            'products',
         ]
 
 
 class ProductCategorySerializer(serializers.ModelSerializer):
+
     class Meta:
         model = ProductCategory
         fields = ['id', 'name']
 
 
 class ProductSerializer(serializers.ModelSerializer):
-
-    supplier = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = Product
@@ -38,5 +42,5 @@ class ProductSerializer(serializers.ModelSerializer):
             'price',
             'discount',
             'category',
-            'supplier'
+            'supplier',
         ]

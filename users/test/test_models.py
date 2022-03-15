@@ -7,8 +7,8 @@ class ModelsTests(TestCase):
 
     def setUp(self) -> None:
         self.user = User.objects.create(
-            name="user1",
-            email="user1@admin.com",
+            name="user",
+            email="user1@user.com",
             password="user123",
             role="admin",
             first_name="Angel",
@@ -18,7 +18,6 @@ class ModelsTests(TestCase):
         )
 
     def test_create_user_without_required_fields(self):
-        """Test create user without required fields"""
 
         with self.assertRaises(ValueError):
             User.objects.create_user(

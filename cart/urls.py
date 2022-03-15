@@ -1,6 +1,13 @@
 from django.urls import path
 
-from .views import CartView, CartDetailView, CartItemView, CartItemDetailView, OrderView, OrderDetailView
+from .views import (
+    CartView,
+    CartDetailView,
+    CartItemView,
+    CartItemDetailView,
+    OrderView,
+    OrderDetailView,
+)
 
 
 urlpatterns = [

@@ -1,5 +1,6 @@
 from django.db import models
-from django.conf import settings
+
+from users.models import User
 
 
 class ProductCategory(models.Model):
@@ -18,7 +19,7 @@ class Product(models.Model):
     title = models.CharField(verbose_name="Title", max_length=100)
     description = models.TextField(blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
-    pictures = models.ImageField(upload_to='images/')
+    pictures = models.ImageField(upload_to='images/', blank=True, null=True)
     price = models.FloatField(blank=True, null=True)
     discount = models.DecimalField(
         max_digits=9,
@@ -31,9 +32,8 @@ class Product(models.Model):
         on_delete=models.CASCADE
     )
     supplier = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="supplier",
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
@@ -59,14 +59,12 @@ class Comment(models.Model):
         on_delete=models.CASCADE
     )
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        related_name="comment_author",
-        on_delete=models.CASCADE
+        User,
+        on_delete=models.CASCADE,
     )
     products = models.ForeignKey(
         Product,
-        related_name="comment",
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

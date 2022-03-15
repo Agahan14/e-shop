@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from decimal import Decimal
 
 from .models import Cart, CartItem, Order
 
@@ -7,12 +8,17 @@ class CartItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CartItem
-        exclude = ['content_type']
+        fields = [
+            'id',
+            'quantity',
+            'price',
+            'product',
+            'cart',
+        ]
 
 
 class CartSerializer(serializers.ModelSerializer):
 
-    products = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
     class Meta:
@@ -23,20 +29,24 @@ class CartSerializer(serializers.ModelSerializer):
             'total_price',
             'created_date',
             'is_order',
-            'products'
         ]
 
     def get_total_price(self, obj):
+        cart_id = obj.id
+        cart_items = CartItem.objects.filter(cart=cart_id)
         total_price = 0
-        for product in obj.products.all():
-            total_price += product.price * product.quantity
 
+        for item in cart_items:
+            if item.product.discount > 0:
+                total_price += Decimal(item.price) - (Decimal(item.price) *
+                                                 (Decimal(item.product.discount) / 100))
+            else:
+                total_price += Decimal(item.price)
         return total_price
 
 
-class OrderSerializer(serializers.Serializer):
+class OrderSerializer(serializers.ModelSerializer):
 
-    products = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
     class Meta:
@@ -47,15 +57,18 @@ class OrderSerializer(serializers.Serializer):
             'cart',
             'order_date',
             'total_price',
-            'products']
+        ]
 
-    def get_total_price(self, obj):
+    def get_total_price(self,obj):
+        cart_id = obj.cart.id
+        cart_items = CartItem.objects.filter(cart=cart_id)
         total_price = 0
-        for product in obj.products.all():
-            if product.discount > 0:
-                total_price += (product.price - (product.price
-                                                 * (product.discount/100))) * product.quantity
-            else:
-                total_price += product.price * product.quantity
 
+        for item in cart_items:
+            if item.product.discount > 0:
+                total_price += Decimal(item.price) - (Decimal(item.price) *
+                                                      (Decimal(item.product.discount) / 100))
+            else:
+                total_price += Decimal(item.price)
         return total_price
+
