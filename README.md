@@ -41,3 +41,7 @@ Thanks to the mentor for his great help
 ## links
 
 Links for heroku's app - [https://eshopstore14.herokuapp.com/](https://eshopstore14.herokuapp.com/)
+
+## Postman collections
+
+[https://www.getpostman.com/collections/89234c196fca9f47d041](https://www.getpostman.com/collections/89234c196fca9f47d041)
