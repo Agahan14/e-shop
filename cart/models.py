@@ -48,7 +48,6 @@ class Order(models.Model):
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
-        limit_choices_to={"is_order": "False"},
     )
 
     def __str__(self):
